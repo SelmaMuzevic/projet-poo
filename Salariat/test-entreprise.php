@@ -14,6 +14,35 @@ $entreprise = new Entreprise([
     new Employe('Johnson', 'Peter', 22, 'Rhone Alpes', new DateTime('2010-10-05'), 3000),
     new Employe('Maxson', 'Larry', 28, 'Rhone Alpes', new DateTime('2010-10-05'), 3450)
 ], 10000);
-
+/* On lance la methode de reevaluation des salaires.
+ * 
+ */
 $entreprise->reevaluation();
+
+$entreprise->verserSalaire();
+
+echo '<pre>';
 var_dump($entreprise);
+
+echo '</pre>';
+
+require_once './Caisse.php';
+$caisse = new Caisse();
+echo $caisse->cotisation(10000);
+var_dump($caisse);
+
+
+/**
+ * 
+ */
+$employe = new Employe("test", 
+        "test", 
+        10,
+        "test", 
+        new DateTime(), 
+        100);
+
+$employe->toucherSalaire();
+echo '<pre>';
+var_dump($employe);
+echo '</pre>';

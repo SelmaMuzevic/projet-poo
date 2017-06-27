@@ -6,6 +6,7 @@
  * and open the template in the editor.
  */
 include_once '../Person.php';
+include_once './Caisse.php';
 /**
  * Description of Employe
  *
@@ -15,6 +16,8 @@ class Employe extends Person {
     
     private $DateArivee;
     private $salaire;
+    private $compteBancaire;
+    private $caisse;
     
     public function __construct(string $nom, 
             string $prenom, 
@@ -26,6 +29,11 @@ class Employe extends Person {
         parent::__construct($nom, $prenom, $age, $region);
         $this->DateArivee = $dateArrivee;
         $this->salaire = $salaire;
+        
+        // on initialise le compteBancaire caisse directement.
+        
+        $this->compteBancaire = 0;
+        $this->caisse = new Caisse();
     }
     
     public function anciennete():int{
@@ -55,6 +63,15 @@ public function getSalaire():int {
 		
        return $this->salaire;
 		
+ }
+ /**
+  * Méthode qui permettra l'employeur de toucher son salaire tout en cotisant
+  * a sa caisse des cotisations .
+  */
+ public function toucherSalaire(){
+     $this->compteBancaire += 
+     $this->caisse->cotisation($this->salaire);
+     
  }
 		
 }
